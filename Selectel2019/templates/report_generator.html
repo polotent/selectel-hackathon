@@ -22,14 +22,14 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
 
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" />
 
 </head>
 
 <body>
     <div class="container main-container">
         <div class="row">
-            <div>
+            <div class="col-xs-4 col-xs-offset-4">
                 <form method="post" action="/get_history">
                     <p id="set-time-title">Set Your Time Period</p>
                     <div class="form-group">
@@ -40,28 +40,26 @@
                         <label for="end-time">End :</label>
                         <input type="text" class="form-control" id="end-time">
                     </div>
-                    <input type="submit" value="Submit">
+                    <input id="show-history-button" type="submit" value="Show history">
                 </form>
             </div>
         </div>
     </div>
 
     <!-- For Calendar -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/moment-with-locales.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
-            $('#datetimepicker1').datetimepicker({
+            $('#start-time').datetimepicker({
                 locale: 'ru',
-                stepping: 10,
-                format: 'DD.MM.YYYY',
-                defaultDate: moment('01.11.2017').format('DD.MM.YYYY'),
-                daysOfWeekDisabled: [0, 6]
+                stepping: 10
             });
-            $('#datetimepicker2').datetimepicker({
-                locale: 'ru'
+            $('#end-time').datetimepicker({
+                locale: 'ru',
+                stepping: 10
             });
         });
     </script>
