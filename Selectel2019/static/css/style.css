@@ -82,11 +82,6 @@ input[type=text]:focus {
   font-weight: bold;
 }
 
-
-.table-fixed thead {
-  width: 97%;
-}
-
 .table-fixed tbody {
   height: 230px;
   overflow-y: auto;
@@ -105,4 +100,16 @@ input[type=text]:focus {
 .table-fixed thead>tr>th {
   float: left;
   border-bottom-width: 0;
+}
+
+.td-white {
+  background-color: white;
+}
+
+.td-gray {
+  background-color: #ccc;
+}
+
+.td-blue {
+  background-color: hsl(202, 70%, 64%);
 }

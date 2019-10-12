@@ -65,19 +65,26 @@
                 <table id="history" class="table table-fixed">
                     <thead>
                         <tr>
-                            <th class="col-xs-3">#</th>
-                            <th class="col-xs-3">Time</th>
-                            <th class="col-xs-3">Author</th>
-                            <th class="col-xs-3">Commit Message</th>
+                            <th class="col-xs-3 td-blue">#</th>
+                            <th class="col-xs-3 td-blue">Time</th>
+                            <th class="col-xs-3 td-blue">Author</th>
+                            <th class="col-xs-3 td-blue">Commit Message</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for el in history %}
                             <tr>
-                                <td class="col-xs-3">{{ loop.index }}</td>
-                                <td class="col-xs-3">{{ el[0] }}</td>
-                                <td class="col-xs-3">{{ el[1][0]["author"] }}</td>
-                                <td class="col-xs-3">{{ el[1][0]["message"] }}</td>
+                            {% if loop.index % 2 == 0 %}
+                                <td class="col-xs-3 td-white">{{ loop.index }}</td>
+                                <td class="col-xs-3 td-white">{{ el[0] }}</td>
+                                <td class="col-xs-3 td-white">{{ el[1][0]["author"] }}</td>
+                                <td class="col-xs-3 td-white">{{ el[1][0]["message"] }}</td>
+                            {% else %}
+                                <td class="col-xs-3 td-gray">{{ loop.index }}</td>
+                                <td class="col-xs-3 td-gray">{{ el[0] }}</td>
+                                <td class="col-xs-3 td-gray">{{ el[1][0]["author"] }}</td>
+                                <td class="col-xs-3 td-gray">{{ el[1][0]["message"] }}</td>
+                            {% endif %}                
                             </tr>
                         {% endfor %}
                     </tbody>

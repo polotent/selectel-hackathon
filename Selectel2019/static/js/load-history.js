@@ -19,10 +19,17 @@ $(document).ready(function () {
                 }
                 for (var i = 0; i < commits.length; i++) {
                     content += '<tr>';
-                    content += '<td class="col-xs-3">' + (i + 1).toString() + '</td>';
-                    content += '<td class="col-xs-3">' + commits[i][0] + '</td>';
-                    content += '<td class="col-xs-3">' + commits[i][1][0]["author"] + '</td>';
-                    content += '<td class="col-xs-3">' + commits[i][1][0]["message"] + '</td>';
+                    if (i % 2 == 0){
+                        content += '<td class="col-xs-3 td-white">' + (i + 1).toString() + '</td>';
+                        content += '<td class="col-xs-3 td-white">' + commits[i][0] + '</td>';
+                        content += '<td class="col-xs-3 td-white">' + commits[i][1][0]["author"] + '</td>';
+                        content += '<td class="col-xs-3 td-white">' + commits[i][1][0]["message"] + '</td>';
+                    } else {
+                        content += '<td class="col-xs-3 td-gray">' + (i + 1).toString() + '</td>';
+                        content += '<td class="col-xs-3 td-gray">' + commits[i][0] + '</td>';
+                        content += '<td class="col-xs-3 td-gray">' + commits[i][1][0]["author"] + '</td>';
+                        content += '<td class="col-xs-3 td-gray">' + commits[i][1][0]["message"] + '</td>';
+                    }
                     content += '</tr>';
                 }
                 
