@@ -9,9 +9,10 @@
     <!-- Bootstrap -->
     <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
+    <!-- Fonts-icons CSS -->
     <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
@@ -20,18 +21,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    
-
+    <!-- For Ajax update history table -->
+    <script src="{{ url_for('static', filename='js/load-history.js') }}"></script>
     <!-- For Calendar -->
-    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='js/load-history.js') }}"></script>
-
     <script type="text/javascript">
-        $(function () {
+        $(function (){
             $('#startTime').datetimepicker({
                 locale: 'ru',
                 stepping: 10
@@ -65,26 +62,33 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-striped" id="history">
+                <table id="history" class="table table-fixed">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Time</th>
-                            <th>Author</th>
-                            <th>Commit Message</th>
+                            <th class="col-xs-3">#</th>
+                            <th class="col-xs-3">Time</th>
+                            <th class="col-xs-3">Author</th>
+                            <th class="col-xs-3">Commit Message</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for el in history %}
                             <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ el[0] }}<td>
-                                <td>{{ el[1][0]["author"] }}</td>
-                                <td>{{ el[1][0]["message"] }}</td>
+                                <td class="col-xs-3">{{ loop.index }}</td>
+                                <td class="col-xs-3">{{ el[0] }}</td>
+                                <td class="col-xs-3">{{ el[1][0]["author"] }}</td>
+                                <td class="col-xs-3">{{ el[1][0]["message"] }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <form>
+                    <button id="generate-report-button" type="submit" class="btn btn-warning">Show history</button>
+                </form>
             </div>
         </div>
     </div>

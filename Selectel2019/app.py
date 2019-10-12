@@ -4,7 +4,7 @@ from git_api import GitProcessor
 from time_parser import TimeParser
 
 app = Flask(__name__, static_url_path='/static/')
-INITIAL_COMMITS = 5
+INITIAL_COMMITS = 10
 
 
 @app.route('/')

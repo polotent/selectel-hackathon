@@ -10,9 +10,24 @@ $(document).ready(function () {
                 url: '/get_history'
             })
             .done(function (data) {
-                var table = document.getElementById("history");
-                alert(data);
-                table.innerHTML = "Hello World!";
+                var content = '';
+                var commits = data["data"];
+                if (commits.length == 0){
+                    content += '<tr>';
+                    content += '<td class="col-xs-12" colspan="4">No commits were made during this period</td>';
+                    content += '</tr>';
+                }
+                for (var i = 0; i < commits.length; i++) {
+                    content += '<tr>';
+                    content += '<td class="col-xs-3">' + (i + 1).toString() + '</td>';
+                    content += '<td class="col-xs-3">' + commits[i][0] + '</td>';
+                    content += '<td class="col-xs-3">' + commits[i][1][0]["author"] + '</td>';
+                    content += '<td class="col-xs-3">' + commits[i][1][0]["message"] + '</td>';
+                    content += '</tr>';
+                }
+                
+                $('#history').find('tbody').html(content);
+                                
             });
         event.preventDefault();
     });

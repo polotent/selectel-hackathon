@@ -1,6 +1,7 @@
 import requests
 import re
 import json
+from time_parser import TimeParser
 
 
 class GitProcessor:
@@ -16,20 +17,20 @@ class GitProcessor:
             if start_time is None and end_time is None:
                 response = requests.get(f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits')
             else:
-                start_time_parsed, end_time_parsed = 1, 2
-                response = requests.get(f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits?since={start_time_parsed}&until={end_time_parsed}')
+                response = requests.get(f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits?since={start_time}&until={end_time}')
             commit_dict = dict()
             content = json.loads(response.content)
             for el in content:
-                if el["commit"]["author"]["date"] not in commit_dict:
-                    commit_dict[el["commit"]["author"]["date"]] = [
+                parsed_time = TimeParser.parse_time(time=el["commit"]["author"]["date"], param="git->web")
+                if parsed_time not in commit_dict:
+                    commit_dict[parsed_time] = [
                         {
                             "author": el["commit"]["author"]["name"],
                             "message": el["commit"]["message"]
                         }
                     ]
                 else:
-                    commit_dict[el["commit"]["author"]["date"]].append(
+                    commit_dict[parsed_time].append(
                         {
                             "author": el["commit"]["author"]["name"],
                             "message": el["commit"]["message"]
