@@ -27,13 +27,16 @@
     <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/load-history.js') }}"></script>
+
     <script type="text/javascript">
         $(function () {
-            $('#start-time').datetimepicker({
+            $('#startTime').datetimepicker({
                 locale: 'ru',
                 stepping: 10
             });
-            $('#end-time').datetimepicker({
+            $('#endTime').datetimepicker({
                 locale: 'ru',
                 stepping: 10
             });
@@ -43,50 +46,43 @@
 
 <body>
     <div class="container main-container">
-        <!-- <div class="row">
-            <div class="form-group">
-                <label for="user-select">Select Repository User:</label>
-                <select class="form-control" id="user-select">
-                    <option>Alex</option>
-                    <option>Egor</option>
-                </select>
-            </div>
-        </div> -->
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4">
-                <form method="post" action="/get_history">
+                <form>
                     <p id="set-time-title">Set Your Time Period</p>
                     <div class="form-group">
-                        <label for="start-time">Start :</label>
-                        <input type="text" class="form-control" id="start-time">
+                        <label for="startTime">Start :</label>
+                        <input type="text" class="form-control" id="startTime">
                     </div>
                     <div class="form-group">
-                        <label for="end-time">End :</label>
-                        <input type="text" class="form-control" id="end-time">
+                        <label for="endTime">End :</label>
+                        <input type="text" class="form-control" id="endTime">
                     </div>
-                    {% if repo_link %}
-                        <input type="hidden" name="repo_link" id="repo_link" value="{{ repo_link }}">
-                    {% endif %}                    
-                    <input id="show-history-button" type="submit" value="Show history" class="btn btn-warning">
+                    <input type="hidden" id="repoLink" value="{{ repo_link }}">            
+                    <button id="show-history-button" type="submit" class="btn btn-warning">Show history</button>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <table class="table table-striped">
+                <table class="table table-striped" id="history">
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Time</th>
                             <th>Author</th>
                             <th>Commit Message</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                        </tr>
+                        {% for el in history %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ el[0] }}<td>
+                                <td>{{ el[1][0]["author"] }}</td>
+                                <td>{{ el[1][0]["message"] }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

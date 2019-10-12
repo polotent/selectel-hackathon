@@ -1,5 +1,5 @@
 class TextProcessor:
-    def validate_link(self, link):
+    def validate_link(link):
         try:
             if "github.com" in link:
                 return True
