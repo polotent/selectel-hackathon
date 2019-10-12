@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AutoReport</title>
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- <link rel="shortcut icon" href="../img/site_icon.jpg"> -->
+
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+
+<body>
+    <div class="container main-container">
+        <div class="row main-row">
+            <form action="/link-request" method="post">
+                <div>
+                    <p id="main-title">Paste your github repository link</p>
+                </div>
+                <div>
+                    <input type="text" id="link-input-field" name="link" placeholder="Link" required>
+                </div>
+                <div>
+                    {% if text %}
+                        <div>
+                            <p id="error-message">{{ text }}</p>
+                        </div>
+                    {% endif %}
+                    <button type="submit"  id="generate-button" type="button" class="btn btn-warning">Generate</button>
+                </div>
+            </form>
+        </div>            
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+[packages]
+gunicorn = "*"
+Flask = "*"
+gitpython = "*"
+requests = "*"
+
+[dev-packages]
+flake8 = "*"
