@@ -8,9 +8,9 @@
     <title>AutoReport</title>
     <!-- Bootstrap -->
     <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" />
+    <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
-    <!-- <link rel="shortcut icon" href="../img/site_icon.jpg"> -->
 
     <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- Fonts -->
@@ -20,31 +20,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}" />
-
-</head>
-
-<body>
-    <div class="container main-container">
-        <div class="row">
-            <div class="col-xs-4 col-xs-offset-4">
-                <form method="post" action="/get_history">
-                    <p id="set-time-title">Set Your Time Period</p>
-                    <div class="form-group">
-                        <label for="start-time">Start :</label>
-                        <input type="text" class="form-control" id="start-time">
-                    </div>
-                    <div class="form-group">
-                        <label for="end-time">End :</label>
-                        <input type="text" class="form-control" id="end-time">
-                    </div>
-                    <input id="show-history-button" type="submit" value="Show history">
-                </form>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- For Calendar -->
     <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
@@ -63,6 +39,59 @@
             });
         });
     </script>
+</head>
+
+<body>
+    <div class="container main-container">
+        <!-- <div class="row">
+            <div class="form-group">
+                <label for="user-select">Select Repository User:</label>
+                <select class="form-control" id="user-select">
+                    <option>Alex</option>
+                    <option>Egor</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <form method="post" action="/get_history">
+                    <p id="set-time-title">Set Your Time Period</p>
+                    <div class="form-group">
+                        <label for="start-time">Start :</label>
+                        <input type="text" class="form-control" id="start-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="end-time">End :</label>
+                        <input type="text" class="form-control" id="end-time">
+                    </div>
+                    {% if repo_link %}
+                        <input type="hidden" name="repo_link" id="repo_link" value="{{ repo_link }}">
+                    {% endif %}                    
+                    <input id="show-history-button" type="submit" value="Show history" class="btn btn-warning">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Author</th>
+                            <th>Commit Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cell</td>
+                            <td>Cell</td>
+                            <td>Cell</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

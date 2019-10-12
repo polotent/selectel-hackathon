@@ -51,8 +51,6 @@ label {
   width: 100%;
 }
 
-
-
 input[type=text] {
   font-size : 20px;
   padding: 10px 15px;
@@ -67,7 +65,7 @@ input[type=text]:focus {
   box-shadow: inset 0 0 5px 5px rgba(245, 197, 65, 0.527);
 }
 
-#generate-button {
+#generate-button, #show-history-button {
   font-size: 20px;
   font-family: Arial;
   border-radius: 0px;

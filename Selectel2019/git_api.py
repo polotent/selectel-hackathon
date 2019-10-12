@@ -9,7 +9,7 @@ class GitProcessor:
             repo_link = repo_link[:len(repo_link)-4]
         self.repo_link = repo_link
 
-    def get_history(self, num_of_commits=5):
+    def get_initial_history(self, num_of_commits=5):
         try:
             temp_arr = re.split(r'[/:]', self.repo_link)
             repo_name = temp_arr[len(temp_arr)-1]
@@ -20,19 +20,21 @@ class GitProcessor:
             content = json.loads(response.content)
             for el in content:
                 if el["commit"]["author"]["name"] not in commit_dict:
-                    commit_dict[el["commit"]["author"]["name"]] = [
+                    commit_dict[el["commit"]["author"]["date"]] = [
                         {
-                            "time": el["commit"]["author"]["date"],
                             "message": el["commit"]["message"]
                         }
                     ]
                 else:
-                    commit_dict[el["commit"]["author"]["name"]].append(
+                    commit_dict[el["commit"]["author"]["date"]].append(
                         {
-                            "time": el["commit"]["author"]["date"],
                             "message": el["commit"]["message"]
                         }
                     )
-            return commit_dict
+            commits = sorted(commit_dict.items())
+            return commits[:num_of_commits]
         except Exception:
             return list()
+
+    def get_history_by_period(self, start_time, end_time):
+        pass
