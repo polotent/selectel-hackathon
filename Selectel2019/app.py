@@ -10,6 +10,10 @@ app = Flask(__name__, static_url_path='/static/')
 def hello():
     return render_template("main.html")
 
+@app.route('/debug')
+def debug():
+    return render_template("report_generator.html")
+
 
 @app.route('/link-request', methods=['POST'])
 def response():

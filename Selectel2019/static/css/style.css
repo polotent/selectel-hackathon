@@ -21,7 +21,8 @@ html, body {
   margin-bottom : 50px;
 }
 
-#main-title {
+#main-title,
+#set-time-title {
   font-size : 30px;
   color: #ffffff;
   /* font-family : "Comic Sans MS"; */
@@ -31,13 +32,24 @@ html, body {
   margin-bottom : 0px;
 }
 
+label {
+  font-size: 20px;
+  color: #ffffff;
+  /* font-family : "Comic Sans MS"; */
+  font-family: Arial;
+  text-transform: capitalize;
+  vertical-align: bottom;
+  margin-bottom: 0px;
+}
+
+
+
 #link-input-field {
   width : 75%;
 }
 
 input[type=text] {
   font-size : 20px;
-  width: 100%;
   padding: 10px 15px;
   margin: 8px 0;
   box-sizing: border-box;

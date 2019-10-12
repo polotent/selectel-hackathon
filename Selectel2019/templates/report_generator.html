@@ -21,27 +21,50 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" media="screen">
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
 
 </head>
 
 <body>
     <div class="container main-container">
-        <div class="row main-row">
-           <div>
+        <div class="row">
+            <div>
                 <form method="post" action="/get_history">
-                    <div data-role="rangeslider">
-                        <label for="price-min">Price:</label>
-                        <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                        <label for="price-max">Price:</label>
-                        <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                    <p id="set-time-title">Set Your Time Period</p>
+                    <div class="form-group">
+                        <label for="start-time">Start :</label>
+                        <input type="text" class="form-control" id="start-time">
                     </div>
-                    <input type="submit" data-inline="true" value="Submit">
+                    <div class="form-group">
+                        <label for="end-time">End :</label>
+                        <input type="text" class="form-control" id="end-time">
+                    </div>
+                    <input type="submit" value="Submit">
                 </form>
-           </div>
+            </div>
         </div>
     </div>
+
+    <!-- For Calendar -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                locale: 'ru',
+                stepping: 10,
+                format: 'DD.MM.YYYY',
+                defaultDate: moment('01.11.2017').format('DD.MM.YYYY'),
+                daysOfWeekDisabled: [0, 6]
+            });
+            $('#datetimepicker2').datetimepicker({
+                locale: 'ru'
+            });
+        });
+    </script>
 </body>
 
 </html>
