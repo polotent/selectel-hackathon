@@ -49,17 +49,18 @@
                     <p id="set-time-title">Set Your Time Period</p>
                     <div class="form-group">
                         <label for="startTime">Start :</label>
-                        <input type="text" class="form-control" id="startTime">
+                        <input type="text" class="form-control" id="startTime" value="{{ start_default_value }}">
                     </div>
                     <div class="form-group">
                         <label for="endTime">End :</label>
-                        <input type="text" class="form-control" id="endTime">
+                        <input type="text" class="form-control" id="endTime" value="{{ end_default_value }}">
                     </div>
+                    <p id="error-message" style="display:none">Invalid time period</p>
                     <input type="hidden" id="repoLink" value="{{ repo_link }}">            
                     <button id="show-history-button" type="submit" class="btn btn-warning">Show history</button>
                 </form>
             </div>
-        </div>
+        </div>     
         <div class="row">
             <div class="col-xs-12">
                 <table id="history" class="table table-fixed">
@@ -94,7 +95,11 @@
         <div class="row">
             <div class="col-xs-4 col-xs-offset-4">
                 <form>
-                    <button id="generate-report-button" type="submit" class="btn btn-warning">Show history</button>
+                    <button id="generate-report-button" type="submit" class="btn btn-warning">Generate Report</button>
+                     <div class="form-group">
+                         <label for="comment">Report:</label>
+                         <textarea class="form-control" rows="5" id="report"></textarea>
+                     </div>
                 </form>
             </div>
         </div>

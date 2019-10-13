@@ -16,27 +16,34 @@ class GitProcessor:
 
             if start_time is None and end_time is None:
                 response = requests.get(f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits')
-            else:
+            elif start_time is not None and end_time is not None:
+                if start_time >= end_time:
+                    return False
                 response = requests.get(f'https://api.github.com/repos/{repo_owner}/{repo_name}/commits?since={start_time}&until={end_time}')
+            else:
+                return False
+
             commit_dict = dict()
             content = json.loads(response.content)
             for el in content:
-                parsed_time = TimeParser.parse_time(time=el["commit"]["author"]["date"], param="git->web")
-                if parsed_time not in commit_dict:
-                    commit_dict[parsed_time] = [
+                if el["commit"]["author"]["date"] not in commit_dict:
+                    commit_dict[el["commit"]["author"]["date"]] = [
                         {
                             "author": el["commit"]["author"]["name"],
                             "message": el["commit"]["message"]
                         }
                     ]
                 else:
-                    commit_dict[parsed_time].append(
+                    commit_dict[el["commit"]["author"]["date"]].append(
                         {
                             "author": el["commit"]["author"]["name"],
                             "message": el["commit"]["message"]
                         }
                     )
             commits = sorted(commit_dict.items())
+
+            for i in range(len(commits)):
+                commits[i] = [TimeParser.parse_time(time=commits[i][0], param="git->web"), commits[i][1]]                
             if num_of_commits == "inf":
                 return commits
             else:

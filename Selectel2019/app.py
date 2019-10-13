@@ -9,12 +9,7 @@ INITIAL_COMMITS = 10
 
 @app.route('/')
 def index():
-    return render_template("main.html")
-
-
-@app.route('/debug')
-def debug():
-    return render_template("report_generator.html")
+    return render_template(template_name_or_list="main.html")
 
 
 @app.route('/link-request', methods=['POST'])
@@ -22,7 +17,18 @@ def response():
     link = request.form['link']
     if TextProcessor.validate_link(link):
         git_history = GitProcessor.get_history(repo_link=link, num_of_commits=INITIAL_COMMITS)
-        return render_template("report_generator.html", history=git_history, repo_link=link)
+        if len(git_history) > 0:
+            start_default_value = git_history[0][0]
+            end_default_value = git_history[len(git_history)-1][0]
+        else:
+            start_default_value = ""
+            end_default_value = ""
+
+        return render_template(template_name_or_list="report_generator.html",
+                               history=git_history,
+                               repo_link=link,
+                               start_default_value=start_default_value,
+                               end_default_value=end_default_value)
     else:
         return render_template("main.html", text="Invalid Git Repository Link")
 
